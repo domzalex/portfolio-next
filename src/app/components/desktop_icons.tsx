@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Image, { StaticImageData } from "next/image"
 
 import aboutImage from '../../../public/feather.png'

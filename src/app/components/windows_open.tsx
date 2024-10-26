@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {  } from 'react'
 
 import Image from "next/image"
 
@@ -42,7 +42,7 @@ interface Props {
     setIsResize: React.Dispatch<React.SetStateAction<FocusedWindow | null>>,
 }
 
-const WindowsOpen = ({windowsOpen, handleMouseDown, setWindowsOpen, offset, isResize, setIsResize}: Props) => {
+const WindowsOpen = ({windowsOpen, handleMouseDown, setWindowsOpen, setIsResize}: Props) => {
 
     const setFocusedWindow = (index: number) => {
         const temp = [...windowsOpen]
@@ -74,7 +74,7 @@ const WindowsOpen = ({windowsOpen, handleMouseDown, setWindowsOpen, offset, isRe
                                 <p className="font-bold text-white text-sm ml-2 select-none cursor-default">{window.name}</p>
                             </div>
                             <div className="h-full flex items-center">
-                                <div className="h-full px-4 flex items-center justify-center bg-black/75 sm:hover:bg-teal-800 sm:active:bg-teal-900 active:bg-teal-900" onClick={(e) => maximizeWindow(window, index)}>
+                                <div className="h-full px-4 flex items-center justify-center bg-black/75 sm:hover:bg-teal-800 sm:active:bg-teal-900 active:bg-teal-900" onClick={() => maximizeWindow(window, index)}>
                                     <div className="h-4 aspect-square border"></div>
                                 </div>
                                 <div className="h-full px-4 flex items-center justify-center bg-black/75 sm:hover:bg-red-700 sm:active:bg-red-800 active:bg-red-800" onClick={() => setWindowsOpen((prev) => prev.filter(win => win.name != window.name))}>

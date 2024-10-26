@@ -137,7 +137,7 @@ const Page = () => {
                 window.removeEventListener('mouseup', handleMouseUp)
             }
         }
-    }, [isDragging, isResize])
+    }, [isDragging, isResize, handleMouseMove, resizeWindow])
 
     return (
         <div ref={mainWindowRef} className="flex-1 flex items-center justify-center z-0 bg-black">

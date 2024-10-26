@@ -16,9 +16,9 @@ const Blog = ({sentUrl}: Props) => {
             setUrl(sentUrl)
             setTempUrl(sentUrl)
         }
-    }, [])
+    }, [sentUrl])
 
-    const submitNewUrl = (e: any) => {
+    const submitNewUrl = (e: React.KeyboardEvent) => {
         if (e.code === 'Enter') {
             setUrl(tempUrl)
         }

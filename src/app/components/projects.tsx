@@ -7,12 +7,12 @@ import file from '../../../public/file.png'
 const Projects = () => {
 
     const [folderOpen, setFolderOpen] = useState<string | null>(null)
-    const [paidProjects, setPaidProjects] = useState([
+    const [paidProjects] = useState([
         {name: 'B.F.G. Productions', type: 'Text document'},
         {name: 'Fresh Squeeze Cleaner', type: 'Text document'},
         {name: '[REDACTED] Software', type: 'Text document'},
     ])
-    const [personalProjects, setPersonalProjects] = useState([
+    const [personalProjects] = useState([
         {name: 'The Cul-De-Sac', type: 'Text document'},
         {name: 'Omnitool.io', type: 'Text document'},
         {name: 'Tower Defense Game', type: 'Text document'},
