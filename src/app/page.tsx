@@ -1,101 +1,155 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { useState, useEffect, useRef } from "react"
+import Background from "./components/background"
+import Toolbar from "./components/toolbar"
+import DesktopIcons from "./components/desktop_icons"
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+import WindowsOpen from "./components/windows_open"
+
+interface Window {
+    name: string,
+    size: {
+        width: number,
+        height: number
+    },
+    setSize: {
+        width: number,
+        height: number
+    },
+    prevPos: {
+        top: number,
+        left: number
+    },
+    pos: {
+        top: number,
+        left: number
+    }
 }
+
+interface FocusedWindow {
+    window: Window,
+    direction: string
+}
+
+const Page = () => {
+
+    const [windowsOpen, setWindowsOpen] = useState<Window[]>([])
+
+    const [isDragging, setIsDragging] = useState<Window | null>(null)
+    const [offset, setOffset] = useState({ x: 0, y: 0 })
+    const [isResize, setIsResize] = useState<FocusedWindow | null>(null)
+    const [height, setHeight] = useState(522)
+
+    const mainWindowRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        if (mainWindowRef.current) {
+            if (mainWindowRef.current.getBoundingClientRect().width <= 640) {
+                setHeight(10000)
+            } else setHeight(522)
+            
+        }
+    }, [])
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>, window: Window, index: number) => {
+        setIsDragging(window)
+
+        const temp = [...windowsOpen]
+    
+        const selectedWindow = temp.splice(index, 1)[0]
+    
+        temp.push(selectedWindow)
+
+        setWindowsOpen(temp)
+
+        setOffset({
+            x: e.clientX - window.pos.left,
+            y: e.clientY - window.pos.top
+        })
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+        if (!isDragging) return
+
+        const newPos = {
+            left: e.clientX - offset.x,
+            top: e.clientY - offset.y
+        }
+        setWindowsOpen((prev) => 
+            prev.map((win) => win.name === isDragging.name ? { ...win, pos: newPos } : win)
+        )
+    }
+
+    const resizeWindow = (e: MouseEvent) => {
+        let newSize: { width: number; height: number }
+
+        switch (isResize?.direction) {
+            case 'ew' :
+                newSize = {
+                    width: e.clientX - isResize.window.pos.left,
+                    height: isResize.window.size.height,
+                }
+                break
+            case 'ns' :
+                newSize = {
+                    width: isResize.window.size.width,
+                    height: e.clientY - isResize.window.pos.top,
+                }
+                break
+            case 'nwse' :
+                newSize = {
+                    width: e.clientX - isResize.window.pos.left,
+                    height: e.clientY - isResize.window.pos.top,
+                }
+                break
+        }
+        
+        if (isResize) {
+            setWindowsOpen((prev) =>
+                prev.map((win) =>
+                    win.name === isResize.window.name ? { ...win, size: newSize } : win
+                )
+            )
+        }
+    }
+    
+    const handleMouseUp = () => {
+        setIsDragging(null)
+    }
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener('mousemove', handleMouseMove)
+            window.addEventListener('mouseup', handleMouseUp)
+
+            return () => {
+                window.removeEventListener('mousemove', handleMouseMove)
+                window.removeEventListener('mouseup', handleMouseUp)
+            }
+        }
+        else if (isResize) {
+            window.addEventListener('mousemove', resizeWindow)
+            window.addEventListener('mouseup', handleMouseUp)
+
+            return () => {
+                window.removeEventListener('mousemove', resizeWindow)
+                window.removeEventListener('mouseup', handleMouseUp)
+            }
+        }
+    }, [isDragging, isResize])
+
+    return (
+        <div ref={mainWindowRef} className="flex-1 flex items-center justify-center z-0 bg-black">
+            <Background />
+
+            <DesktopIcons setWindowsOpen={setWindowsOpen} mainHeight={height} />
+
+            <WindowsOpen windowsOpen={windowsOpen} handleMouseDown={handleMouseDown} setWindowsOpen={setWindowsOpen} offset={offset} isResize={isResize} setIsResize={setIsResize} />
+
+            <Toolbar />
+        </div>
+    )
+}
+
+export default Page
