@@ -15,7 +15,7 @@ const Page = () => {
                     <br /><br />
                     <div className="w-full h-[1px] bg-neutral-600"></div>
                     <br />
-                    This was my very first paid project, and also my first project with <b>React.js</b> back in the fall of 2020. I was contracted by a small entertainment company based out of Atlanta, GA to build their company's website. They have since expanded into Florida.
+                    This was my very first paid project, and also my first project with <b>React.js</b> back in the fall of 2020. I was contracted by a small entertainment company based out of Atlanta, GA to build their company&#39;s website. They have since expanded into Florida.
                     <br /><br />
                     The tech stack itself is a basic <b>MERN</b> stack, with <b>MongoDB, Express, React,</b> and <b>Node</b>.
                     <br /><br />
@@ -23,7 +23,7 @@ const Page = () => {
                     <br /><br />
                     To make things easier for the business, I created an <b>admin dashboard</b> that allowed people within the company to <b>create, update,</b> and <b>delete</b> any and all of their events as well as their roster of DJs and live bands.
                     <br /><br />
-                    This was an excellent "first paid project," and even though I now only occasionally do some maintenance, I learned a lot from this experience.
+                    This was an excellent &#34;first paid project,&#34; and even though I now only occasionally do some maintenance, I learned a lot from this experience.
                 </p>
             </div>
         </div>

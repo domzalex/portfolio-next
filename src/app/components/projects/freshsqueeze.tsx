@@ -17,7 +17,7 @@ const Page = () => {
                     <br />
                     This was the first client that <b>Studio Azure</b> did work for.
                     <br /><br />
-                    The client's needs were simple. They needed a landing page for their cleaning business that didn't <i>"look like every other site."</i>
+                    The client&#39;s needs were simple. They needed a landing page for their cleaning business that didn&#39;t <i>&#34;look like every other site.&#34;</i>
                     <br /><br />
                     We went with a minimalist color block style, with a soft typeface and pastel colors. The client wanted potential customers to be able to submit an inquiry directly on the website.
                     <br /><br />

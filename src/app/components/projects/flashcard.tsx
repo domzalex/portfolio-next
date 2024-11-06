@@ -12,9 +12,9 @@ const Page = () => {
                     <br />
                     This project spawned from a desire to have my own mobile flashcard application, similar to <b>Anki</b>.
                     <br /><br />
-                    Anki is an excellent flashcard tool and is very higly regarded. They have a mobile application, though I've not used it since it is a <b>paid product</b>.
+                    Anki is an excellent flashcard tool and is very higly regarded. They have a mobile application, though I&#39;ve not used it since it is a <b>paid product</b>.
                     <br /><br />
-                    The problem I'm solving with my own flashcard app largely revolves around the <b>UX side of things</b>. One of my main complaints about Anki was its UX/UI design.
+                    The problem I&#39;m solving with my own flashcard app largely revolves around the <b>UX side of things</b>. One of my main complaints about Anki was its UX/UI design.
                     <br /><br />
                     Core features of my flashcard application are:
                     <br />

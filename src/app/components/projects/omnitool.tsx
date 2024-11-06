@@ -14,15 +14,15 @@ const Page = () => {
                     <br /><br />
                     Making a basic multiple-choice quiz creator is a walk in the park with client-side JavaScript, but when you are forced to do everything on the server, <b>things get a bit tricky</b>.
                     <br /><br />
-                    For the server, I used <b>Go</b>, since it has a niche audience with HTMX-enjoyers. If you wanted to make a quiz application in JavaScript, you'd simply create your quiz form and maybe an HTML template or two, and then simply keep track of the values of the selected HTML elements within your client-side JavaScript code.
+                    For the server, I used <b>Go</b>, since it has a niche audience with HTMX-enjoyers. If you wanted to make a quiz application in JavaScript, you&#39;d simply create your quiz form and maybe an HTML template or two, and then simply keep track of the values of the selected HTML elements within your client-side JavaScript code.
                     <br /><br />
-                    But what about when you can't simply manipulate your DOM with JavaScript? If someone adds a lot of questions in a row, and then goes back to add answers to each question <b>out of order</b>, how does the server know which question an answer belongs to?
+                    But what about when you can&#39;t simply manipulate your DOM with JavaScript? If someone adds a lot of questions in a row, and then goes back to add answers to each question <b>out of order</b>, how does the server know which question an answer belongs to?
                     <br /><br />
-                    Those were the sorts of issues I ran into with this project. It still needs work, but it's been a fun challenge to tackle. Feel free to check it out.
+                    Those were the sorts of issues I ran into with this project. It still needs work, but it&#39;s been a fun challenge to tackle. Feel free to check it out.
                     <br /><br />
                     I am well aware that this sort of thing is trivial in the grand scheme of things, but it provided a challenge for someone who almost exclusively uses JavaScript. Figuring out more elegant and ideal solutions is all part of the fun!
                     <br /><br />
-                    All quizzes created are <b>URL-encloded</b> and not stored anywhere, so don't lose your URL!
+                    All quizzes created are <b>URL-encloded</b> and not stored anywhere, so don&#39;t lose your URL!
                 </p>
             </div>
         </div>
